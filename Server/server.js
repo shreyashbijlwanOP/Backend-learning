@@ -2,6 +2,8 @@ import express from "express";
 
 import dotenv from "dotenv";
 
+import path from "path";
+
 import cookieParser from "cookie-parser";
 
 // For Imports we need to use .js Extension mandatory
@@ -33,10 +35,19 @@ app.use(cookieParser());
 // Routes Wil Go here
 app.use("/api/users", userRouter);
 
-// creating a get Route
-app.get("/", (req, res) => {
-  res.json({ msg: "Hello From server " });
-});
+if (process.env.NODE_ENV == "production") {
+  const __dirname = path.resolve();
+
+  app.use(express.static(path.join(__dirname, "Client/dist")));
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "Client", "dist", "index.htl"));
+  });
+} else {
+  // creating a get Route
+  app.get("/", (req, res) => {
+    res.json({ msg: "Hello From server " });
+  });
+}
 
 // Error Handler
 app.use(notFound);
