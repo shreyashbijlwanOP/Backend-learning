@@ -38,9 +38,10 @@ app.use("/api/users", userRouter);
 if (process.env.NODE_ENV == "production") {
   const __dirname = path.resolve();
 
-  app.use(express.static(path.join(__dirname, "Client/dist")));
+  app.use(express.static(path.join(__dirname, "../client/dist")));
+
   app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "Client", "dist", "index.htl"));
+    res.sendFile("client/dist/index.html");
   });
 } else {
   // creating a get Route

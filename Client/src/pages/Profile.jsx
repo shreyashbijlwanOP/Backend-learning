@@ -53,10 +53,10 @@ const Profile = () => {
 
   const [updateUser, { isLoading: updating }] = useUpdateUserMutation();
 
-  const isUpdatePassword = useWatch({
-    name: "updatePassword",
-    control,
-  });
+  // const isUpdatePassword = useWatch({
+  //   name: "updatePassword",
+  //   control,
+  // });
 
   const errorHandler = () => {
     const timer = setTimeout(() => {
@@ -157,26 +157,6 @@ const Profile = () => {
               mandatory={true}
               placeholder="Email goes here"
             />
-            {isUpdatePassword && (
-              <>
-                {/* Password */}
-                <PasswordInput
-                  name="newPassword"
-                  register={register}
-                  mandatory={true}
-                  label="password"
-                  error={errors?.password?.message}
-                />
-                {/* Confirm Password */}
-                <PasswordInput
-                  name="confirmPassword"
-                  register={register}
-                  mandatory={true}
-                  label="Confirm password"
-                  error={errors?.confirmPassword?.message}
-                />
-              </>
-            )}
 
             {/* Action Button */}
             <button className="btn btn-primary mt-3 w-100" disabled={updating}>
@@ -199,3 +179,25 @@ const Profile = () => {
 };
 
 export default Profile;
+
+/*
+{isUpdatePassword && (
+              <>
+
+                <PasswordInput
+                  name="newPassword"
+                  register={register}
+                  mandatory={true}
+                  label="password"
+                  error={errors?.password?.message}
+                />
+                <PasswordInput
+                  name="confirmPassword"
+                  register={register}
+                  mandatory={true}
+                  label="Confirm password"
+                  error={errors?.confirmPassword?.message}
+                />
+              </>
+            )}
+*/
